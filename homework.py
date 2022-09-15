@@ -12,10 +12,10 @@ class InfoMessage:
     calories: float
     MESSAGE: ClassVar[str] = (
         'Тип тренировки: {training_type}; '
-        'Длительность: {duration:.3f}; '
-        'Дистанция: {distance:.3f}; '
-        'Ср. скорость: {speed:.3f}; '
-        'Потрачено ккал: {calories:.3f};'
+        'Длительность: {duration:.3f} ч.; '
+        'Дистанция: {distance:.3f} км; '
+        'Ср. скорость: {speed:.3f} км/ч; '
+        'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
@@ -35,6 +35,7 @@ class Training:
     weight: float
     M_IN_KM: ClassVar[int] = 1000
     TIME_IN_HOUR: ClassVar[int] = 60
+    LEN_STEP: ClassVar[float] = 0.65
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -62,7 +63,6 @@ class Running(Training):
     """Тренировка: бег."""
     COEFF_CALORIE_1: float = 18
     COEFF_CALORIE_2: float = 20
-    LEN_STEP: ClassVar[float] = 0.65
 
     def get_spent_calories(self) -> float:
         return (
@@ -79,7 +79,6 @@ class SportsWalking(Training):
     height: float
     COEFF_CALORIE_1: float = 0.035
     COEFF_CALORIE_2: float = 0.029
-    LEN_STEP: ClassVar[float] = 0.65
 
     def get_spent_calories(self) -> float:
         """"Получить количество затрачиваемых калорий"""
@@ -94,16 +93,16 @@ class SportsWalking(Training):
 @dataclass
 class Swimming(Training):
     """Тренировка: плавание."""
-    lenght_pool: float
+    length_pool: float
     count_pool: float
-    COEFF_CALORIE_1: float = 1.1
-    COEFF_CALORIE_2: float = 2
-    LEN_STEP: float = 1.38
+    COEFF_CALORIE_1: ClassVar[float] = 1.1
+    COEFF_CALORIE_2: ClassVar[float] = 2
+    LEN_STEP: ClassVar[float] = 1.38
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
         return (
-            self.lenght_pool * self.count_pool
+            self.length_pool * self.count_pool
             / self.M_IN_KM / self.duration
         )
 
