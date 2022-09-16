@@ -67,8 +67,8 @@ class Running(Training):
         return (
             (self.COEFF_CALORIE_1 * self.get_mean_speed()
              - self.COEFF_CALORIE_2)
-             * self.weight / self.M_IN_KM * self.duration
-             * self.TIME_IN_HOUR
+            * self.weight / self.M_IN_KM * self.duration
+            * self.TIME_IN_HOUR
         )
 
 
